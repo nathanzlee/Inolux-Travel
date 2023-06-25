@@ -9,6 +9,9 @@ const User = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [department, setDepartment] = useState('')
+    const [level, setLevel] = useState(1)
     const [manager, setManager] = useState('')
 
     useEffect(() => {
@@ -28,7 +31,7 @@ const User = () => {
     }, [])
     
     async function createUser() {
-        const newUser = {firstName: firstName, lastName: lastName, email: email, manager: manager}
+        const newUser = {firstName: firstName, lastName: lastName, email: email, password: password, department: department, level: level, manager: manager}
         console.log(newUser)
         const req = await fetch('/api/test/user', {
             method: 'POST',
@@ -61,6 +64,21 @@ const User = () => {
                             type='text'
                             placeholder='Email'
                             onChange={e => {setEmail(e.target.value)}}
+                        />
+                        <input
+                            type='password'
+                            placeholder='Password'
+                            onChange={e => {setPassword(e.target.value)}}
+                        />
+                        <input
+                            type='text'
+                            placeholder='Department'
+                            onChange={e => {setDepartment(e.target.value)}}
+                        />
+                        <input
+                            type='number'
+                            placeholder='Level'
+                            onChange={e => {setLevel(e.target.value)}}
                         />
                         <Select options={users} initial={users.length > 0 ? users[0] : {id: 0, option: ''}} onChange={e => {
                             console.log(e)
